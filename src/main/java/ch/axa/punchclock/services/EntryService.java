@@ -2,11 +2,14 @@ package ch.axa.punchclock.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import ch.axa.punchclock.models.Entry;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
+@Service
 public class EntryService {
     @PersistenceContext
     private EntityManager em;
@@ -24,11 +27,14 @@ public class EntryService {
         return this.em.createQuery("SELECT e FROM Entry e", Entry.class).getResultList();
     }
 
+    @Transactional
     public void update(Entry entry) {
         this.em.merge(entry);
     }
 
+    @Transactional
     public void delete(Entry entry) {
-        this.em.remove(entry);
+        Entry managedEntry = em.contains(entry) ? entry : em.merge(entry);
+        em.remove(managedEntry);
     }
 }
