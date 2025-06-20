@@ -29,7 +29,7 @@ public class Entry {
     @Column
     private int duration;
 
-    @NotBlank
+    @NotBlank(message = "Darf nicht leer sein!")
     @Column(length = 5000)
     private String description;
 
