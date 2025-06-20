@@ -19,7 +19,7 @@
             <tr>
               <th>Beschreibung</th>
               <th>Von</th>
-              <th>Bis</th>
+              <th>Dauer</th>
               <th>Bearbeiten</th>
               <th>Löschen</th>
             </tr>
@@ -28,7 +28,7 @@
             <tr th:each="entry : ${entries}">
               <td th:text="${entry.description}"></td>
               <td th:text="${entry.checkIn}"></td>
-              <td th:text="${entry.checkOut}"></td>
+              <td th:text="${entry.duration}"></td>
               <td><a th:href="@{/edit/{id}(id=${entry.id})}">Bearbeiten</a></td>
               <td><a th:href="@{/delete/{id}(id=${entry.id})}">Löschen</a></td>
             </tr>
