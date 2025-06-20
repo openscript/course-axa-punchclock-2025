@@ -2,6 +2,8 @@ package ch.axa.punchclock.models;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ public class Entry {
     @Column(name = "entry_id")
     private Long id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "check_in", nullable = false)
     private LocalDateTime checkIn;
 
