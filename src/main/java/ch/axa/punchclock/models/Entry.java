@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "entry")
@@ -19,6 +21,7 @@ public class Entry {
     @Column(name = "entry_id")
     private Long id;
 
+    @NotNull(message = "Bitte gib den Startzeitpunkt bekannt!")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "check_in", nullable = false)
     private LocalDateTime checkIn;
@@ -26,6 +29,7 @@ public class Entry {
     @Column
     private int duration;
 
+    @NotBlank
     @Column(length = 5000)
     private String description;
 
