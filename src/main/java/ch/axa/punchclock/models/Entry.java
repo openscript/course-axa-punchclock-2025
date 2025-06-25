@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,9 +43,11 @@ public class Entry {
 
     @ManyToMany
     @JoinTable(name = "entry_tags", joinColumns = @JoinColumn(name = "entry_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @JsonIgnoreProperties(value = "entries")
     private Set<Tag> tags = new HashSet<>();
 
     @ManyToOne
+    @JsonIgnoreProperties(value = "entries")
     private Category category;
 
     public Long getId() {
