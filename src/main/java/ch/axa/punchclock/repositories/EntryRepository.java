@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import ch.axa.punchclock.models.Entry;
 
-public interface EntryRepository extends CrudRepository<Entry, Long> {
+public interface EntryRepository extends CrudRepository<Entry, Long>, EntryRepositoryFilter {
     Iterable<Entry> findByCategory(@Param("categoryId") long categoryId);   
 
     Iterable<Entry> findByTagsId(Long tagId);
