@@ -1,8 +1,5 @@
 package ch.axa.punchclock.controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.axa.punchclock.models.Entry;
-import ch.axa.punchclock.models.Tag;
 import ch.axa.punchclock.repositories.CategoryRepository;
 import ch.axa.punchclock.repositories.EntryRepository;
-import ch.axa.punchclock.repositories.TagRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -45,10 +40,18 @@ public class APIEntryController {
 
   @GetMapping
   public Iterable<Entry> index(
-    @RequestParam(required = false) Long categoryId
+    @RequestParam(required = false) Long categoryId,
+    @RequestParam(required = false) Long tagId,
+    @RequestParam(required = false) String descriptionSearch
   ) {
-    if(categoryId != null) {
+    if (categoryId != null) {
       return entryRepository.findByCategory(categoryId);
+    }
+    if (tagId != null) {
+      return entryRepository.findByTagsId(tagId);
+    }
+    if (descriptionSearch != null) {
+      return entryRepository.searchByDescription(descriptionSearch);
     }
     return entryRepository.findAll();
   }
